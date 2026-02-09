@@ -22,8 +22,8 @@
         .hero h1 { font-size: 2.8rem; margin: 0; }
         .hero p { font-size: 1.3rem; font-weight: 300; max-width: 800px; margin: 20px auto; }
 
-        nav { background: var(--dark); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center; padding: 15px; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
+        nav { background: var(--dark); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center; padding: 15px; flex-wrap: wrap; }
+        nav a { color: white; text-decoration: none; margin: 5px 15px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
         nav a:hover { color: var(--yellow); }
         .btn-menu { background: var(--red); padding: 10px 20px; border-radius: 5px; }
 
@@ -32,7 +32,24 @@
 
         .hub-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--red); }
         
-        /* GRID SI EFECT DE MARIRE (HOVER) */
+        /* STIL NOU: MESAJUL ZILEI */
+        .quote-box {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 5px solid var(--orange);
+            border-bottom: 5px solid var(--orange);
+        }
+        .quote-box blockquote {
+            font-size: 1.6rem;
+            font-style: italic;
+            color: #444;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .grid-hub, .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         
         .hub-card, .review-card { 
@@ -59,7 +76,6 @@
         footer { background: #000; color: #777; text-align: center; padding: 2rem; }
         @media (max-width: 768px) { .contact-box { grid-template-columns: 1fr; } }
 
-        /* MODAL CSS */
         #serviceModal {
             display: none;
             position: fixed;
@@ -99,65 +115,53 @@
         <a href="#poveste">Povestea Noastră</a>
         <a href="meniu.html" class="btn-menu">Vezi Meniul Complet</a>
         <a href="#hub">Servicii</a>
+        <a href="#mesaj">Mesajul Zilei</a>
         <a href="#reviews">Review-uri</a>
         <a href="#contact">Contact</a>
     </nav>
 
-   <section id="poveste">
-    <h2 class="section-title">O fărâmă de Mexic, o poveste de neuitat</h2>
-    <div class="hub-box">
-        <p>Totul a pornit dintr-o <strong>scânteie de curaj și un dor nebun de soare</strong>. Nu ne-am dorit doar un restaurant, ci un loc unde timpul stă în loc, iar distanțele dispar.</p>
-        
-        <p>La <strong>El Patio Suceava</strong>, am plecat la drum cu o viziune simplă: credem că mâncarea nu este doar hrană, ci o călătorie senzorială care îți hrănește sufletul. Povestea noastră s-a scris din pasiunea pentru culorile vibrante și aromele explozive ale Americii Latine, pe care am dorit să le aducem într-o formă modernistă chiar în inima orașului.</p>
-        
-        <p>Aici, tradiția și viitorul se întâlnesc în farfurie. Fiecare tortilla este preparată proaspăt, manual, respectând ritualul vechi de generații, în timp ce rețetele noastre rămân un mix secret între sfaturile pline de înțelepciune ale bunicilor din Mexic și tehnicile moderne de gătire.</p>
-        
-        <p>Nu alegem doar condimente; alegem emoții care să îți trezească simțurile la fiecare înghițitură. Te invităm să descoperi cum gustul de „acasă” de peste ocean devine noua ta amintire preferată din Suceava.</p>
-    </div>
-   </section>
+    <section id="poveste">
+        <h2 class="section-title">O fărâmă de Mexic, o poveste de neuitat</h2>
+        <div class="hub-box">
+            <p>Totul a pornit dintr-o <strong>scânteie de curaj și un dor nebun de soare</strong>. Nu ne-am dorit doar un restaurant, ci un loc unde timpul stă în loc, iar distanțele dispar.</p>
+            <p>La <strong>El Patio Suceava</strong>, am plecat la drum cu o viziune simplă: credem că mâncarea nu este doar hrană, ci o călătorie senzorială care îți hrănește sufletul. Povestea noastră s-a scris din pasiunea pentru culorile vibrante și aromele explozive ale Americii Latine, pe care am dorit să le aducem într-o formă modernistă chiar în inima orașului.</p>
+            <p>Aici, tradiția și viitorul se întâlnesc în farfurie. Fiecare tortilla este preparată proaspăt, manual, respectând ritualul vechi de generații, în timp ce rețetele noastre rămân un mix secret între sfaturile pline de înțelepciune ale bunicilor din Mexic și tehnicile moderne de gătire.</p>
+            <p>Nu alegem doar condimente; alegem emoții care să îți trezească simțurile la fiecare înghițitură. Te invităm să descoperi cum gustul de „acasă” de peste ocean devine noua ta amintire preferată din Suceava.</p>
+        </div>
+    </section>
 
-  <section id="hub">
-<h2 class="section-title">Servicii El Patio</h2>
-<div class="grid-hub">
+    <section id="hub">
+        <h2 class="section-title">Servicii El Patio</h2>
+        <div class="grid-hub">
+            <div class="hub-card" data-title="Takeaway & Livrare" data-description="Mâncarea ta preferată oriunde te-ai afla." data-image="https://www.restajet.com/wp-content/uploads/2023/04/How-to-open-a-takeaway-13.jpg">
+                <h3>🛍️ Takeaway & Livrare</h3><p>Oriunde. Oricând.</p>
+            </div>
+            <div class="hub-card" data-title="Evenimente Live" data-description="Muzică live și seri tematice latino." data-image="https://images.unsplash.com/photo-1506157786151-b8491531f063">
+                <h3>🎸 Evenimente Live</h3><p>Atmosferă garantată.</p>
+            </div>
+            <div class="hub-card" data-title="Catering" data-description="Evenimente private sau corporate." data-image="https://images.unsplash.com/photo-1555243896-c709bfa0b564">
+                <h3>💼 Catering</h3><p>Pachete personalizate.</p>
+            </div>
+            <div class="hub-card" data-title="Carduri Cadou" data-description="Cadoul perfect pentru iubitorii de gusturi autentice." data-image="https://i.etsystatic.com/10158652/r/il/e9267d/1320400492/il_fullxfull.1320400492_d0mh.jpg">
+                <h3>🎟️ Carduri Cadou</h3><p>O experiență, nu un obiect.</p>
+            </div>
+            <div class="hub-card" data-title="Chef's Specials" data-description="Preparate exclusive, disponibile lunar." data-image="https://images.unsplash.com/photo-1551218808-94e220e084d2">
+                <h3>👨‍🍳 Chef's Specials</h3><p>Surprize lunare.</p>
+            </div>
+            <div class="hub-card" data-title="Social Hub" data-description="Pozează, dă tag și câștigă vouchere." data-image="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+                <h3>📸 Social Hub</h3><p>Tag & win.</p>
+            </div>
+        </div>
+    </section>
 
-<div class="hub-card" data-title="Takeaway & Livrare"
-data-description="Mâncarea ta preferată oriunde te-ai afla."
-data-image="https://www.restajet.com/wp-content/uploads/2023/04/How-to-open-a-takeaway-13.jpg">
-<h3>🛍️ Takeaway & Livrare</h3><p>Oriunde. Oricând.</p>
-</div>
-
-<div class="hub-card" data-title="Evenimente Live"
-data-description="Muzică live și seri tematice latino."
-data-image="https://images.unsplash.com/photo-1506157786151-b8491531f063">
-<h3>🎸 Evenimente Live</h3><p>Atmosferă garantată.</p>
-</div>
-
-<div class="hub-card" data-title="Catering"
-data-description="Evenimente private sau corporate."
-data-image="https://images.unsplash.com/photo-1555243896-c709bfa0b564">
-<h3>💼 Catering</h3><p>Pachete personalizate.</p>
-</div>
-
-<div class="hub-card" data-title="Carduri Cadou"
-data-description="Cadoul perfect pentru iubitorii de gusturi autentice."
-data-image="https://i.etsystatic.com/10158652/r/il/e9267d/1320400492/il_fullxfull.1320400492_d0mh.jpg">
-<h3>🎟️ Carduri Cadou</h3><p>O experiență, nu un obiect.</p>
-</div>
-
-<div class="hub-card" data-title="Chef's Specials"
-data-description="Preparate exclusive, disponibile lunar."
-data-image="https://images.unsplash.com/photo-1551218808-94e220e084d2">
-<h3>👨‍🍳 Chef's Specials</h3><p>Surprize lunare.</p>
-</div>
-
-<div class="hub-card" data-title="Social Hub"
-data-description="Pozează, dă tag și câștigă vouchere."
-data-image="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
-<h3>📸 Social Hub</h3><p>Tag & win.</p>
-</div>
-
-</div>
-</section>
+    <section id="mesaj">
+        <div class="quote-box">
+            <h2 class="section-title" style="margin-top: 0; font-size: 2rem;">🌮 Mesajul Zilei</h2>
+            <blockquote>
+                "Nu poți cumpăra fericirea, dar poți cumpăra un taco, ceea ce este cam același lucru. Fă din ziua de azi o aventură la fel de picantă și plină de viață ca un sos autentic mexican!"
+            </blockquote>
+        </div>
+    </section>
 
     <section id="reviews">
         <h2 class="section-title">Ce spun Amigos</h2>
@@ -172,61 +176,50 @@ data-image="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
         </div>
     </section>
 
-<section id="contact">
-    <div class="contact-box">
-        <div>
-            <h2 style="color: var(--yellow);">Unde ne găsești?</h2>
-            <p>📍 Str. Leca Morariu nr. 13A, Suceava</p>
-            <p>(Lângă Colegiul Economic "Dimitrie Cantemir")</p>
-            <p>📞 +40 744 123 456</p>
-            <p>⏰ <strong>Program:</strong> L-D: 09:00 - 23:00</p>
+    <section id="contact">
+        <div class="contact-box">
+            <div>
+                <h2 style="color: var(--yellow);">Unde ne găsești?</h2>
+                <p>📍 Str. Leca Morariu nr. 11A, Suceava</p>
+                <p>(Lângă Colegiul Economic "Dimitrie Cantemir")</p>
+                <p>📞 +40 744 123 456</p>
+                <p>⏰ <strong>Program:</strong> L-V: 08:00 - 22:00 | S-D: 09:00-23:00 </p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2688.1347073708845!2d26.24276137689531!3d47.64293998485295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4734fc494ea96e81%3A0xad945a4a82c726a6!2sColegiul%20Economic%20%22Dimitrie%20Cantemir%22!5e0!3m2!1sro!2sro!4v1709200000000!5m2!1sro!2sro" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
         </div>
-        <div class="map-container">
-<iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2688.1347073708845!2d26.24276137689531!3d47.64293998485295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4734fc494ea96e81%3A0xad945a4a82c726a6!2sColegiul%20Economic%20%22Dimitrie%20Cantemir%22!5e0!3m2!1sro!2sro!4v1709200000000!5m2!1sro!2sro" 
-    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-</iframe>
+    </section>
+
+    <footer><p>© 2026 El Patio Suceava. Savoarea Modernistă.</p></footer>
+
+    <div id="serviceModal">
+        <div class="modal-box">
+            <span class="close">×</span>
+            <img id="modalImg">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
         </div>
     </div>
-</section>
 
-<footer><p>© 2026 El Patio Suceava. Savoarea Modernistă.</p></footer>
+    <script>
+        const modal = document.getElementById("serviceModal");
+        const modalImg = document.getElementById("modalImg");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDesc = document.getElementById("modalDesc");
+        const closeBtn = document.querySelector(".close");
 
-<!-- MODAL -->
-<div id="serviceModal">
-  <div class="modal-box">
-    <span class="close">&times;</span>
-    <img id="modalImg">
-    <h3 id="modalTitle"></h3>
-    <p id="modalDesc"></p>
-  </div>
-</div>
+        document.querySelectorAll(".hub-card").forEach(card => {
+            card.addEventListener("click", () => {
+                modal.style.display = "flex";
+                modalImg.src = card.dataset.image;
+                modalTitle.textContent = card.dataset.title;
+                modalDesc.textContent = card.dataset.description;
+            });
+        });
 
-<!-- SCRIPT MODAL -->
-<script>
-const modal = document.getElementById("serviceModal");
-const modalImg = document.getElementById("modalImg");
-const modalTitle = document.getElementById("modalTitle");
-const modalDesc = document.getElementById("modalDesc");
-const closeBtn = document.querySelector(".close");
-
-document.querySelectorAll(".hub-card").forEach(card => {
-  card.addEventListener("click", () => {
-    modal.style.display = "flex";
-    modalImg.src = card.dataset.image;
-    modalTitle.textContent = card.dataset.title;
-    modalDesc.textContent = card.dataset.description;
-  });
-});
-
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-modal.addEventListener("click", e => {
-  if(e.target === modal) modal.style.display = "none";
-});
-</script>
-
+        closeBtn.addEventListener("click", () => { modal.style.display = "none"; });
+        modal.addEventListener("click", e => { if(e.target === modal) modal.style.display = "none"; });
+    </script>
 </body>
 </html>

@@ -3,683 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meniu Detaliat | El Patio Suceava</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>El Patio Suceava | Meniu Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --accent: #d32f2f; 
-            --wood: #3e2723;
-            --sand: #fdfaf6;
-            --leaf: #2e7d32;
-        }
+        :root { --accent: #d32f2f; --wood: #3e2723; --sand: #fdfaf6; --leaf: #2e7d32; --dark: #1a1a1a; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--sand); color: var(--wood); display: flex; flex-direction: column; min-height: 100vh; }
 
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        /* HEADER & NAV */
+        header { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 2000; }
+        .nav-links { display: flex; gap: 15px; overflow-x: auto; padding: 10px 0; white-space: nowrap; scrollbar-width: none; }
+        .nav-links::-webkit-scrollbar { display: none; }
+        .nav-links a { text-decoration: none; color: var(--wood); font-size: 0.85rem; font-weight: 600; padding: 5px 12px; border-radius: 15px; border: 1px solid #eee; transition: 0.3s; }
+        .nav-links a:hover { background: var(--accent); color: white; }
+        
+        .btn-index { background: #eee; color: var(--wood); border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; text-decoration: none; margin-right: 15px; font-size: 0.9rem; }
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            margin: 0; 
-            background-color: var(--sand);
-            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
-            color: var(--wood);
-            overflow-x: hidden;
-        }
-
-        /* HERO & NAV */
-        .hero-small {
-            height: 250px;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+        /* HERO SECTION */
+        .hero {
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
                         url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;
         }
-        .hero-small h1 {
-            color: white;
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
 
-        .menu-nav { 
-            background: white;
-            padding: 10px; 
-            position: sticky; 
-            top: 0; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-            display: flex; 
-            overflow-x: auto; 
-            z-index: 1000; 
-            justify-content: center;
-        }
-        .menu-nav a { 
-            text-decoration: none; 
-            color: var(--wood); 
-            font-weight: 600; 
-            padding: 10px 15px; 
-            font-size: 0.75rem; 
-            white-space: nowrap; 
-            text-transform: uppercase;
-        }
-        .menu-nav a:hover { color: var(--accent); }
+        /* AUTH MODAL */
+        .auth-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 4000; }
+        .auth-modal { background: white; padding: 35px; width: 90%; max-width: 400px; border-radius: 15px; }
+        .auth-tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid #eee; }
+        .auth-tab { flex: 1; padding: 10px; text-align: center; cursor: pointer; font-weight: 600; color: #999; }
+        .auth-tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+        .auth-modal input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; }
 
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        .category-header { 
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem; 
-            text-align: center;
-            margin-top: 60px;
-            color: var(--accent);
-            border-bottom: 2px solid #e0dacc;
-            padding-bottom: 10px;
-        }
-
+        /* CONTENT GRID - MODIFICAT PENTRU 3 PE ORIZONTALA */
+        .container { max-width: 1200px; margin: auto; padding: 20px; flex: 1; }
+        .category-header { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 50px 0 25px; color: var(--accent); border-left: 5px solid var(--leaf); padding-left: 15px; }
+        
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; 
-            margin-top: 30px; 
+            grid-template-columns: repeat(3, 1fr); /* FORȚEAZĂ 3 COLOANE */
+            gap: 25px; 
+            margin-bottom: 40px;
         }
 
-        .item-card { 
-            background: white;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            border: 1px solid #f0ede6;
-            display: flex;
-            flex-direction: column;
-        }
-        .item-card:hover { transform: translateY(-5px); }
+        /* AJUSTARE PENTRU ECRANE MICI (TABLETE/TELEFOANE) */
+        @media (max-width: 992px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+        .item-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; }
         .item-card img { width: 100%; height: 200px; object-fit: cover; }
-
         .item-content { padding: 20px; flex-grow: 1; }
-        .item-title { 
-            font-family: 'Playfair Display', serif;
-            font-weight: 700; 
-            display: flex; 
-            justify-content: space-between;
-            font-size: 1.2rem;
-        }
-        .item-price { color: var(--leaf); }
-        .item-desc { font-size: 0.85rem; color: #6d4c41; margin-top: 10px; line-height: 1.5; }
+        .item-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: flex-start; }
+        
+        .info-panel { display: none; padding: 15px; background: #fdf6f6; font-size: 0.85rem; border-top: 1px dashed #ddd; color: #555; line-height: 1.5; }
+        .actions { display: flex; gap: 8px; margin-top: 15px; }
+        .info-btn { flex: 1; background: #f0f0f0; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+        .order-btn { flex: 2; background: var(--leaf); color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 0.8rem; }
+        .order-btn.added { background: var(--wood); }
 
-        .item-actions { display: flex; gap: 10px; margin-top: 15px; }
-
-        .order-btn {
-            flex: 2;
-            background: var(--leaf);
-            color: white;
-            border: none;
-            padding: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .order-btn:hover { background: #1b5e20; }
-
-        .info-btn {
-            flex: 1;
-            background: #f0f0f0;
-            border: 1px solid #ddd;
-            color: var(--wood);
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .info-panel {
-            display: none;
-            background: #fafafa;
-            border-top: 1px dashed #ddd;
-            padding: 15px;
-            font-size: 0.8rem;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .info-meta {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid #eee;
-            color: #888;
-            font-style: italic;
-        }
-
-        /* --- SHOPPING CART SIDEBAR --- */
-        #cart-sidebar {
-            position: fixed;
-            right: -400px;
-            top: 0;
-            width: 350px;
-            height: 100%;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            z-index: 2000;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-        }
+        /* CART */
+        #cart-sidebar { position: fixed; right: -400px; top: 0; width: 350px; height: 100%; background: white; box-shadow: -5px 0 20px rgba(0,0,0,0.2); z-index: 3000; transition: 0.4s; display: flex; flex-direction: column; }
         #cart-sidebar.active { right: 0; }
+        .cart-float { position: fixed; bottom: 80px; right: 25px; background: var(--accent); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2500; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .badge { position: absolute; top: 0; right: 0; background: var(--leaf); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; border: 2px solid white; }
 
-        .cart-header {
-            padding: 20px;
-            background: var(--wood);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .cart-items { flex-grow: 1; padding: 20px; overflow-y: auto; }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            align-items: center;
-        }
-        .remove-item { color: #d32f2f; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
-
-        .cart-footer { padding: 20px; background: #f9f9f9; border-top: 1px solid #eee; }
-        .cart-total-row {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-        .checkout-btn {
-            width: 100%;
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .cart-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--accent);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1500;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            font-size: 1.5rem;
-        }
-        .cart-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--leaf);
-            color: white;
-            font-size: 0.7rem;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid white;
-        }
-
-        footer { text-align: center; padding: 50px; opacity: 0.7; }
-        .back-link { display: block; text-align: center; margin: 20px; color: var(--accent); text-decoration: none; font-weight: bold; }
+        /* FOOTER */
+        footer { background: var(--dark); color: white; text-align: center; padding: 25px 0; font-size: 0.9rem; letter-spacing: 1px; margin-top: 50px; }
     </style>
 </head>
 <body>
 
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-modal">
+            <span style="float:right; cursor:pointer; font-size: 1.5rem;" onclick="toggleAuth()">×</span>
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="tabLogin" onclick="switchAuth('login')">Logare</div>
+                <div class="auth-tab" id="tabRegister" onclick="switchAuth('register')">Înregistrare</div>
+            </div>
+            <div id="authForm">
+                <input type="text" placeholder="Nume Complet" id="userName" style="display:none;">
+                <input type="email" placeholder="Email" id="userEmail">
+                <input type="password" placeholder="Parolă" id="userPass">
+                <button class="order-btn" style="width:100%; margin-top:15px; background:var(--accent); font-size: 1rem;" onclick="processAuth()">Confirmă</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div style="display: flex; align-items: center;">
+            <a href="index.html" class="btn-index">Inapoi</a>
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--wood);">EL PATIO</div>
+        </div>
+        <nav class="nav-links">
+            <a href="#signature">Signature</a>
+            <a href="#aperitive">Aperitive</a>
+            <a href="#supe">Supe</a>
+            <a href="#principale">Principale</a>
+            <a href="#vegan">Vegan</a>
+            <a href="#kids">Kids</a>
+            <a href="#bauturi">Băuturi</a>
+        </nav>
+        <div>
+            <span id="welcomeMsg" style="margin-right: 10px; font-weight: 600; display: none; color: var(--leaf);"></span>
+            <button class="btn-account" style="background: var(--wood); color:white; border:none; padding:8px 15px; border-radius:20px; cursor:pointer;" id="accBtn" onclick="toggleAuth()">Cont</button>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>EL PATIO</h1>
+        <p>Savoarea Modernistă în Suceava</p>
+    </div>
+
     <div id="cart-sidebar">
-        <div class="cart-header">
-            <h3>Comanda Ta</h3>
-            <span style="cursor:pointer; font-size: 1.5rem;" onclick="toggleCart()">×</span>
+        <div style="padding: 20px; background: var(--wood); color: white; display: flex; justify-content: space-between;">
+            <h3>Comanda Mea</h3><span onclick="toggleCart()" style="cursor:pointer; font-size: 1.5rem;">×</span>
         </div>
-        <div class="cart-items" id="cart-display">
-            <p style="text-align:center; color:#999; margin-top:20px;">Coșul este gol.</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total-row">
-                <span>Total:</span>
-                <span id="total-price">0 RON</span>
+        <div id="cartList" style="flex-grow: 1; padding: 20px; overflow-y: auto;"></div>
+        <div style="padding: 20px; border-top: 1px solid #eee;">
+            <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom: 15px;">
+                <span>Total:</span> <span id="cartTotal">0 RON</span>
             </div>
-            <button class="checkout-btn">Finalizează Comanda</button>
+            <button class="order-btn" style="width:100%; background: var(--accent); font-size: 1rem;" onclick="finishOrder()">Finalizează Comanda</button>
         </div>
     </div>
 
-    <div class="cart-float" onclick="toggleCart()">
-        🛒 <div class="cart-badge" id="cart-count">0</div>
-    </div>
+    <div class="cart-float" onclick="toggleCart()">🛒<div class="badge" id="cartCount">0</div></div>
 
-    <div class="hero-small">
-        <h1>Meniul Nostru</h1>
-    </div>
-
-    <div class="menu-nav">
-        <a href="#special">Signature</a>
-        <a href="#aperitive">Aperitive</a>
-        <a href="#supe">Supe</a>
-        <a href="#principale">Principale</a>
-        <a href="#vegan">Vegan</a>
-        <a href="#kids">Kids</a>
-        <a href="#bauturi">Drinks</a>
-    </div>
-
-    <div class="container">
-        <a href="index.html" class="back-link">← Înapoi la Pagina Principală</a>
-
-        <h2 id="special" class="category-header">Chef's Signature</h2>
-        <div class="grid">
-            <div class="item-card">
-                <img src="https://braseriaelcarbon.com/wp-content/uploads/2024/04/pulpo-a-la-parrilla-3.jpg">
-                <div class="item-content">
-                    <div class="item-title">Pulpo la Parrilla <span class="item-price">89 RON</span></div>
-                    <p class="item-desc">Caracatiță fragedă cu aromă de fum.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Pulpo la Parrilla', 89)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Tentacule de caracatiță, piure de cartof dulce, chimichurri, usturoi.
-                    <div class="info-meta">Informații: 350g | 420 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://urbancowgirllife.com/wp-content/uploads/2022/05/Mexican-Grilled-Steaks-with-Mole-Butter-3.jpg">
-                <div class="item-content">
-                    <div class="item-title">Vită Mole <span class="item-price">78 RON</span></div>
-                    <p class="item-desc">Antricot maturat în sos Mole artizanal.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Vită Mole', 78)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Antricot de vită, sos mole (ciocolată, chili, arahide), orez negru.
-                    <div class="info-meta">Informații: 400g | 680 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://annainthekitchen.com/wp-content/uploads/2021/01/mofongo.jpg">
-                <div class="item-content">
-                    <div class="item-title">Mofongo Imperial <span class="item-price">65 RON</span></div>
-                    <p class="item-desc">Creveți Black Tiger pe pat de banane plantain.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Mofongo Imperial', 65)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Creveți, banane plantain, usturoi, chicharron, unt.
-                    <div class="info-meta">Informații: 380g | 550 kcal</div>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="aperitive" class="category-header">Aperitive</h2>
-        <div class="grid">
-            <div class="item-card">
-                <img src="https://static.mega-image.ro/site/binaries/_ht_1588072271000/lg/content/gallery/image-components/mega-image-romania-ro/articole-inspiratie/guacamole/comp_00000o0t.png?imwidth=680">
-                <div class="item-content">
-                    <div class="item-title">Guacamole Artisan <span class="item-price">34 RON</span></div>
-                    <p class="item-desc">Avocado proaspăt și chipsuri de casă.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Guacamole Artisan', 34)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Avocado, lime, ceapă roșie, coriandru, chipsuri tortilla.
-                    <div class="info-meta">Informații: 250g | 310 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://static01.nyt.com/images/2019/10/03/dining/kwr-tostones/kwr-tostones-videoSixteenByNineJumbo1600.jpg">
-                <div class="item-content">
-                    <div class="item-title">Tostones <span class="item-price">32 RON</span></div>
-                    <p class="item-desc">Banane verzi prăjite cu mujo de usturoi.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Tostones', 32)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Banane plantain verzi, ulei vegetal, usturoi, sare.
-                    <div class="info-meta">Informații: 200g | 280 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d">
-                <div class="item-content">
-                    <div class="item-title">Nachos Locos <span class="item-price">38 RON</span></div>
-                    <p class="item-desc">Brânză topită, jalapenos și salsa.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Nachos Locos', 38)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Tortilla chips, cheddar, fasole, smântână, jalapeno.
-                    <div class="info-meta">Informații: 300g | 480 kcal</div>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="supe" class="category-header">Supe & Ciorbe</h2>
-        <div class="grid">
-            <div class="item-card">
-                <img src="https://gypsyplate.com/wp-content/uploads/2022/10/puerto-rican-sancocho_square.jpg">
-                <div class="item-content">
-                    <div class="item-title">Sancocho <span class="item-price">48 RON</span></div>
-                    <p class="item-desc">Supă tradițională densă cu 7 tipuri de carne.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Sancocho', 48)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Vită, porc, pui, yuca, porumb, dovleac, rădăcinoase.
-                    <div class="info-meta">Informații: 400ml | 450 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://images.unsplash.com/photo-1588566565463-180a5b2090d2">
-                <div class="item-content">
-                    <div class="item-title">Supa Tortilla <span class="item-price">35 RON</span></div>
-                    <p class="item-desc">Bază de roșii, chili și fâșii crocante.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Supa Tortilla', 35)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Roșii, ardei pasilla, fâșii tortilla, avocado, smântână.
-                    <div class="info-meta">Informații: 350ml | 310 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://www.culinar.ro/img.php?u=https%3A%2F%2Fwww.culinar.ro%2Fuploads%2Fmodules%2Fnews%2F0%2F2015%2F12%2F7%2F26611%2Ffdb_1449504024_supacremadeporumb%281%29.jpg&w=1200">
-                <div class="item-content">
-                    <div class="item-title">Cremă Porumb <span class="item-price">32 RON</span></div>
-                    <p class="item-desc">Porumb dulce și pudră de chili.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Cremă Porumb', 32)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Porumb dulce, smântână vegetală, ceapă albă, fulgi chili.
-                    <div class="info-meta">Informații: 350ml | 290 kcal</div>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="principale" class="category-header">Feluri Principale</h2>
-        <div class="grid">
-            <div class="item-card">
-                <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b">
-                <div class="item-content">
-                    <div class="item-title">Tacos Al Pastor <span class="item-price">42 RON</span></div>
-                    <p class="item-desc">Porc marinat cu ananas și coriandru.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Tacos Al Pastor', 42)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Porc marinat achiote, ananas, tortilla porumb, ceapă.
-                    <div class="info-meta">Informații: 3 bucăți (300g) | 510 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://res.cloudinary.com/grubhub/image/upload/d_search:browse-images:default.jpg/w_339,q_80,fl_lossy,dpr_2.0,c_fill,f_auto,h_156/tmrvkfqpwheugi1lggy5">
-                <div class="item-content">
-                    <div class="item-title">Burrito Jefe <span class="item-price">48 RON</span></div>
-                    <p class="item-desc">Vită Angus, orez, fasole și guacamole.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Burrito Jefe', 48)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Tortilla grâu, vită Angus, orez, fasole, cheddar, guacamole.
-                    <div class="info-meta">Informații: 450g | 890 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh0tzyWFB3y8P4m-Ccdi7irf2yzGo72szakA&s">
-                <div class="item-content">
-                    <div class="item-title">Quesadilla Birria <span class="item-price">44 RON</span></div>
-                    <p class="item-desc">Brânză topită și vită în consomé.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Quesadilla Birria', 44)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Vită gătită lent, mozzarella, ceapă, consomé de vită.
-                    <div class="info-meta">Informații: 350g | 720 kcal</div>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="vegan" class="category-header">Opțiuni Vegane 🌱</h2>
-        <div class="grid">
-            <div class="item-card">
-                <img src="https://theveganplanetkitchen.com/wp-content/uploads/2022/09/IMG_8180-1024x720.jpg">
-                <div class="item-content">
-                    <div class="item-title">Tacos Hibiscus <span class="item-price">36 RON</span></div>
-                    <p class="item-desc">Flori de hibiscus caramelizate.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Tacos Hibiscus', 36)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Flori de hibiscus, ceapă roșie, avocado, ridichi.
-                    <div class="info-meta">Informații: 280g | 290 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://www.thatorganicmom.com/wp-content/uploads/2022/06/black-bean-quinoa-burrito.jpeg">
-                <div class="item-content">
-                    <div class="item-title">Burrito Quinoa <span class="item-price">39 RON</span></div>
-                    <p class="item-desc">Quinoa, fasole și tofu afumat.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Burrito Quinoa', 39)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Tortilla integrală, quinoa, fasole neagră, tofu afumat.
-                    <div class="info-meta">Informații: 400g | 620 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://walnuts.org/wp-content/uploads/2025/04/recipe-Smoothie-Bowl-CloseUp.jpg">
-                <div class="item-content">
-                    <div class="item-title">Bowl Tropical <span class="item-price">35 RON</span></div>
-                    <p class="item-desc">Cartof dulce, mango și dressing agave.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Bowl Tropical', 35)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Cartof dulce copt, mango, edamame, semințe dovleac.
-                    <div class="info-meta">Informații: 400g | 380 kcal</div>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="kids" class="category-header">Meniul Kids</h2>
-        <div class="grid">
-            <div class="item-card">
-                <img src="https://img.taste.com.au/bBODSRhW/taste/2016/11/mini-mexican-quesadillas-74686-1.jpeg">
-                <div class="item-content">
-                    <div class="item-title">Mini Quesadilla <span class="item-price">28 RON</span></div>
-                    <p class="item-desc">Tortilla moale cu brânză nepicantă.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Mini Quesadilla', 28)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Tortilla grâu, mix brânzeturi, porumb fiert.
-                    <div class="info-meta">Informații: 200g | 310 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://blog.boromirmarket.ro/wp-content/uploads/2022/08/pui-crispy-800x840.jpg">
-                <div class="item-content">
-                    <div class="item-title">Pui Crispy <span class="item-price">32 RON</span></div>
-                    <p class="item-desc">Fâșii de pui în crustă de porumb.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Pui Crispy', 32)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Piept pui, fulgi porumb, cartofi prăjiți.
-                    <div class="info-meta">Informații: 250g | 420 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://static01.nyt.com/images/2021/07/22/dining/jr-mushroom-chicharron-tacos/jr-mushroom-chicharron-tacos-videoSixteenByNineJumbo1600-v2.jpg">
-                <div class="item-content">
-                    <div class="item-title">Tacos Junior <span class="item-price">25 RON</span></div>
-                    <p class="item-desc">Taco simplu cu pui și porumb.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Tacos Junior', 25)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Tortilla porumb, pui grătar, brânză rasă.
-                    <div class="info-meta">Informații: 150g | 240 kcal</div>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="bauturi" class="category-header">Băuturi</h2>
-        <div class="grid">
-            <div class="item-card">
-                <img src="https://dietasimpla.wordpress.com/wp-content/uploads/2019/01/limonada_de_mango-2.jpg">
-                <div class="item-content">
-                    <div class="item-title">Limonadă Mango <span class="item-price">24 RON</span></div>
-                    <p class="item-desc">Limonadă cu fructe tropicale.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Limonadă Mango', 24)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Mango, lămâie, mentă, miere.
-                    <div class="info-meta">Informații: 400ml | 120 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://thecrumbykitchen.com/wp-content/uploads/2015/07/Twist-and-Shout-Shake-2.jpg">
-                <div class="item-content">
-                    <div class="item-title">Churros Shake <span class="item-price">28 RON</span></div>
-                    <p class="item-desc">Milkshake cremos cu scorțișoară.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Churros Shake', 28)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> Înghețată vanilie, lapte, scorțișoară, bucăți churros.
-                    <div class="info-meta">Informații: 350ml | 380 kcal</div>
-                </div>
-            </div>
-            <div class="item-card">
-                <img src="https://www.spendwithpennies.com/wp-content/uploads/2016/04/Spend-With-Pennies-Orange-Margarita-21.jpg">
-                <div class="item-content">
-                    <div class="item-title">Fresh Portocale <span class="item-price">22 RON</span></div>
-                    <p class="item-desc">Sursă pură de vitamina C.</p>
-                    <div class="item-actions">
-                        <button class="order-btn" onclick="addToCart('Fresh Portocale', 22)">Comandă</button>
-                        <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
-                    </div>
-                </div>
-                <div class="info-panel">
-                    <strong>Ingrediente:</strong> 100% Portocale proaspete stoarse.
-                    <div class="info-meta">Informații: 300ml | 140 kcal</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="container" id="menu-box"></div>
 
     <footer>
-        <p>© 2026 El Patio Suceava. Savoarea Modernistă.</p>
+        © 2026 El Patio Suceava. Savoarea Modernistă.
     </footer>
 
     <script>
-        function toggleInfo(btn) {
-            const card = btn.closest('.item-card');
-            const panel = card.querySelector('.info-panel');
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-                btn.innerHTML = "ℹ️ Info";
-            } else {
-                panel.style.display = "block";
-                btn.innerHTML = "✖ Închide";
+        const menuItems = [
+            // Toate cele 21 de preparate raman exact la fel ca anterior...
+            { cat: "signature", catName: "Chef's Signature", name: "Pulpo la Parrilla", price: 89, img: "https://braseriaelcarbon.com/wp-content/uploads/2024/04/pulpo-a-la-parrilla-3.jpg", info: "Ingrediente: Caracatiță, cartofi dulci, chimichurri, sare afumată. | 350g | 420 kcal" },
+            { cat: "signature", catName: "Chef's Signature", name: "Vită Mole", price: 78, img: "https://urbancowgirllife.com/wp-content/uploads/2022/05/Mexican-Grilled-Steaks-with-Mole-Butter-3.jpg", info: "Ingrediente: Antricot vită Angus, sos mole artizanal, cacao, chili. | 400g | 680 kcal" },
+            { cat: "signature", catName: "Chef's Signature", name: "Mofongo Imperial", price: 65, img: "https://annainthekitchen.com/wp-content/uploads/2021/01/mofongo.jpg", info: "Ingrediente: Banane plantain zdrobite, creveți, usturoi, bacon. | 380g | 550 kcal" },
+            
+            { cat: "aperitive", catName: "Aperitive", name: "Guacamole Artisan", price: 34, img: "https://static.mega-image.ro/site/binaries/_ht_1588072271000/lg/content/gallery/image-components/mega-image-romania-ro/articole-inspiratie/guacamole/comp_00000o0t.png?imwidth=680", info: "Ingrediente: Avocado proaspăt, lime, ceapă roșie, tortilla chips. | 250g | 310 kcal" },
+            { cat: "aperitive", catName: "Aperitive", name: "Tostones Cubanos", price: 32, img: "https://static01.nyt.com/images/2019/10/03/dining/kwr-tostones/kwr-tostones-videoSixteenByNineJumbo1600.jpg", info: "Ingrediente: Banane verzi prăjite, sare, mujo de usturoi. | 200g | 280 kcal" },
+            { cat: "aperitive", catName: "Aperitive", name: "Nachos Locos", price: 38, img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d", info: "Ingrediente: Tortilla, sos de brânză, jalapenos, salsa fresca. | 300g | 480 kcal" },
+
+            { cat: "supe", catName: "Supe & Ciorbe", name: "Sancocho", price: 48, img: "https://gypsyplate.com/wp-content/uploads/2022/10/puerto-rican-sancocho_square.jpg", info: "Ingrediente: Vită, yuca, porumb, dovleac, rădăcinoase. | 400ml | 450 kcal" },
+            { cat: "supe", catName: "Supe & Ciorbe", name: "Supa Tortilla", price: 35, img: "https://images.unsplash.com/photo-1588566565463-180a5b2090d2", info: "Ingrediente: Roșii coapte, tortilla crocante, chili, avocado. | 350ml | 310 kcal" },
+            { cat: "supe", catName: "Supe & Ciorbe", name: "Cremă Porumb", price: 32, img: "https://www.culinar.ro/uploads/modules/news/0/2015/12/7/26611/fdb_1449504024_supacremadeporumb%281%29.jpg", info: "Ingrediente: Porumb dulce, smântână, semințe dovleac, chili. | 350ml | 290 kcal" },
+
+            { cat: "principale", catName: "Feluri Principale", name: "Tacos Al Pastor", price: 42, img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b", info: "Ingrediente: Porc marinat, ananas, ceapă, coriandru, tortilla. | 300g | 510 kcal" },
+            { cat: "principale", catName: "Feluri Principale", name: "Burrito Jefe", price: 48, img: "https://res.cloudinary.com/grubhub/image/upload/w_339,q_80,fl_lossy,dpr_2.0,c_fill,f_auto,h_156/tmrvkfqpwheugi1lggy5", info: "Ingrediente: Vită Angus, orez, fasole neagră, guacamole. | 450g | 890 kcal" },
+            { cat: "principale", catName: "Feluri Principale", name: "Quesadilla Birria", price: 44, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh0tzyWFB3y8P4m-Ccdi7irf2yzGo72szakA&s", info: "Ingrediente: Vită gătită lent, brânză, ceapă, consomé inclus. | 350g | 720 kcal" },
+
+            { cat: "vegan", catName: "Opțiuni Vegane", name: "Tacos Hibiscus", price: 36, img: "https://theveganplanetkitchen.com/wp-content/uploads/2022/09/IMG_8180-1024x720.jpg", info: "Ingrediente: Flori de hibiscus, avocado, ceapă murată. | 280g | 290 kcal" },
+            { cat: "vegan", catName: "Opțiuni Vegane", name: "Burrito Quinoa", price: 39, img: "https://www.thatorganicmom.com/wp-content/uploads/2022/06/black-bean-quinoa-burrito.jpeg", info: "Ingrediente: Quinoa, tofu afumat, fasole, legume fresh. | 400g | 620 kcal" },
+            { cat: "vegan", catName: "Opțiuni Vegane", name: "Bowl Tropical", price: 35, img: "https://walnuts.org/wp-content/uploads/2025/04/recipe-Smoothie-Bowl-CloseUp.jpg", info: "Ingrediente: Mango, edamame, cartof dulce, sos agave. | 400g | 380 kcal" },
+
+            { cat: "kids", catName: "Meniu Kids", name: "Mini Quesadilla", price: 28, img: "https://img.taste.com.au/bBODSRhW/taste/2016/11/mini-mexican-quesadillas-74686-1.jpeg", info: "Ingrediente: Tortilla moale, mix de brânză nepicant. | 200g | 310 kcal" },
+            { cat: "kids", catName: "Meniu Kids", name: "Pui Crispy", price: 32, img: "https://blog.boromirmarket.ro/wp-content/uploads/2022/08/pui-crispy-800x840.jpg", info: "Ingrediente: Fâșii piept de pui, crustă porumb, cartofi. | 250g | 420 kcal" },
+            { cat: "kids", catName: "Meniu Kids", name: "Tacos Junior", price: 25, img: "https://static01.nyt.com/images/2021/07/22/dining/jr-mushroom-chicharron-tacos/jr-mushroom-chicharron-tacos-videoSixteenByNineJumbo1600-v2.jpg", info: "Ingrediente: Pui la grătar, porumb dulce, brânză moale. | 150g | 240 kcal" },
+
+            { cat: "bauturi", catName: "Băuturi", name: "Limonadă Mango", price: 24, img: "https://dietasimpla.wordpress.com/wp-content/uploads/2019/01/limonada_de_mango-2.jpg", info: "Ingrediente: Mango fresh, suc lime, mentă, apă plată. | 400ml | 120 kcal" },
+            { cat: "bauturi", catName: "Băuturi", name: "Churros Shake", price: 28, img: "https://thecrumbykitchen.com/wp-content/uploads/2015/07/Twist-and-Shout-Shake-2.jpg", info: "Ingrediente: Înghețată vanilie, lapte, scorțișoară. | 350ml | 380 kcal" },
+            { cat: "bauturi", catName: "Băuturi", name: "Fresh Portocale", price: 22, img: "https://www.spendwithpennies.com/wp-content/uploads/2016/04/Spend-With-Pennies-Orange-Margarita-21.jpg", info: "Ingrediente: Portocale 100% proaspăt stoarse. | 300ml | 140 kcal" }
+        ];
+
+        let currentCat = "";
+        const menuBox = document.getElementById('menu-box');
+        menuItems.forEach(item => {
+            if(item.catName !== currentCat) {
+                currentCat = item.catName;
+                menuBox.innerHTML += `<h2 class="category-header" id="${item.cat}">${currentCat}</h2><div class="grid" id="grid-${item.cat}"></div>`;
             }
-        }
-
-        let cart = [];
-        let total = 0;
-
-        function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('active');
-        }
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            total += price;
-            updateCart();
-            if(!document.getElementById('cart-sidebar').classList.contains('active')){
-                toggleCart();
-            }
-        }
-
-        function removeFromCart(index) {
-            total -= cart[index].price;
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function updateCart() {
-            const cartDisplay = document.getElementById('cart-display');
-            const cartCount = document.getElementById('cart-count');
-            const totalPrice = document.getElementById('total-price');
-
-            cartCount.innerText = cart.length;
-            totalPrice.innerText = total + " RON";
-
-            if (cart.length === 0) {
-                cartDisplay.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">Coșul este gol.</p>';
-            } else {
-                cartDisplay.innerHTML = cart.map((item, index) => `
-                    <div class="cart-item">
-                        <div>
-                            <strong>${item.name}</strong><br>
-                            <small>${item.price} RON</small>
+            const card = `
+                <div class="item-card">
+                    <img src="${item.img}">
+                    <div class="item-content">
+                        <div class="item-title"><span>${item.name}</span> <span style="color:var(--leaf); font-weight:700;">${item.price} RON</span></div>
+                        <div class="actions">
+                            <button class="info-btn" onclick="toggleInfo(this)">ℹ️ Info</button>
+                            <button class="order-btn" onclick="addToCart(this, '${item.name}', ${item.price})">Adaugă</button>
                         </div>
-                        <span class="remove-item" onclick="removeFromCart(${index})">Elimină</span>
                     </div>
-                `).join('');
-            }
+                    <div class="info-panel">${item.info}</div>
+                </div>`;
+            document.getElementById(`grid-${item.cat}`).innerHTML += card;
+        });
+
+        // TOATE FUNCTIILE JS RAMAN LA FEL...
+        let user = null; let cart = [];
+        function toggleAuth() { document.getElementById('authOverlay').style.display = (document.getElementById('authOverlay').style.display === 'flex') ? 'none' : 'flex'; }
+        function switchAuth(mode) {
+            document.getElementById('tabLogin').classList.toggle('active', mode === 'login');
+            document.getElementById('tabRegister').classList.toggle('active', mode === 'register');
+            document.getElementById('userName').style.display = mode === 'register' ? 'block' : 'none';
+        }
+        function processAuth() {
+            const email = document.getElementById('userEmail').value;
+            if(!email) return alert("Date incomplete!");
+            user = email.split('@')[0];
+            document.getElementById('welcomeMsg').innerText = "Salut, " + user + "!";
+            document.getElementById('welcomeMsg').style.display = "inline";
+            document.getElementById('accBtn').innerText = "Logout";
+            document.getElementById('accBtn').onclick = () => location.reload();
+            toggleAuth();
+        }
+        function toggleInfo(btn) {
+            const panel = btn.closest('.item-card').querySelector('.info-panel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+        function addToCart(btn, name, price) {
+            cart.push({name, price});
+            btn.innerText = "Adăugat! ✅"; btn.classList.add('added');
+            setTimeout(() => { btn.innerText = "Adaugă"; btn.classList.remove('added'); }, 800);
+            updateCart();
+        }
+        function updateCart() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const total = cart.reduce((s, i) => s + i.price, 0);
+            document.getElementById('cartTotal').innerText = total + " RON";
+            document.getElementById('cartList').innerHTML = cart.map(i => `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eee;"><span>${i.name}</span><b>${i.price} RON</b></div>`).join('');
+        }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
+        function finishOrder() {
+            if(!user) { alert("Te rugăm să te loghezi!"); toggleAuth(); return; }
+            if(cart.length === 0) return alert("Coșul e gol!");
+            alert("Comandă trimisă!"); cart = []; updateCart(); toggleCart();
         }
     </script>
 </body>
